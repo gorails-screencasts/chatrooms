@@ -9,6 +9,6 @@
   <% end %>
 </div>
 
-<%= form_for [@chatroom, Message.new], remote: true do |f| %>
+<%= form_for [@chatroom, Message.new] do |f| %>
   <%= f.text_area :body, rows: 1, class: "form-control", autofocus: true %>
 <% end %>
