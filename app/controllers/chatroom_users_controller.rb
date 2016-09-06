@@ -4,6 +4,7 @@ class ChatroomUsersController < ApplicationController
 
   def create
     @chatroom_user = @chatroom.chatroom_users.where(user_id: current_user.id).first_or_create
+    @chatroom_user.update(last_read_at: Time.zone.now)
     redirect_to @chatroom
   end
 
