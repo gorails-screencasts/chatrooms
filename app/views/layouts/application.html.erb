@@ -56,8 +56,15 @@
           <% if user_signed_in? %>
             <h5>Chatrooms</h5>
             <ul>
-              <% current_user.chatrooms.each do |chatroom| %>
+              <% current_user.chatrooms.public_channels.each do |chatroom| %>
                 <li><%= link_to chatroom.name, chatroom, data: {behavior: "chatroom-link", chatroom_id: chatroom.id} %></li>
+              <% end %>
+            </ul>
+
+            <h5>Users</h5>
+            <ul>
+              <% (User.all - [current_user]).each do |user| %>
+                <li><%= link_to user.username, direct_message_path(user.id), data: {behavior: "chatroom-link", chatroom_id: Chatroom.direct_message_for_users([current_user, user]).id } %></li>
               <% end %>
             </ul>
           <% end %>
